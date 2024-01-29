@@ -1,0 +1,13 @@
+server:
+  port: 8090
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/orders
+    username: root
+    password: root
+  liquibase:
+    change-log: classpath:db/changelog/orders.changelog.sql
+    url: jdbc:postgresql://localhost:5432/orders
+    user: root
+    password: root

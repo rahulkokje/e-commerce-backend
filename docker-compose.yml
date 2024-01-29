@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  product_database:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - '27017:27017'
+    volumes:
+      - ecommerce-data-products:/data/db
+
+  mongo_express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=product_database
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=root
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=root
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+    depends_on:
+      - product_database
+    ports:
+      - "8888:8081"
+
+  orders_database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=orders
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - '5432:5432'
+    volumes:
+      - ecommerce-data-orders:/var/lib/postgresql/data
+
+volumes:
+  ecommerce-data-products:
+  ecommerce-data-orders:
