@@ -1,0 +1,13 @@
+server:
+  port: 8091
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5433/inventory
+    username: root
+    password: root
+  liquibase:
+    change-log: classpath:db/changelog/inventory.changelog.sql
+    url: jdbc:postgresql://localhost:5433/inventory
+    user: root
+    password: root

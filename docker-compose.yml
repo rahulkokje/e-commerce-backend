@@ -39,6 +39,18 @@ services:
     volumes:
       - ecommerce-data-orders:/var/lib/postgresql/data
 
+  inventory_database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=inventory
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - '5433:5432'
+    volumes:
+      - ecommerce-data-inventory:/var/lib/postgresql/data
+
 volumes:
   ecommerce-data-products:
   ecommerce-data-orders:
+  ecommerce-data-inventory:
