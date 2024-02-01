@@ -2,6 +2,8 @@ server:
   port: 8090
 
 spring:
+  application:
+    name: order-service
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/orders
     username: root
@@ -11,3 +13,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/orders
     user: root
     password: root
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

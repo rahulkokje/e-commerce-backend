@@ -1,6 +1,16 @@
+server:
+  port: 8092
+
 spring:
+  application:
+    name: product-service
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/products?authSource=admin
       reactive:
         enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
