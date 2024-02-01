@@ -24,10 +24,12 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     private Mono<Boolean> checkIfProductIsInStock(String skuCode, Integer orderQuantity) {
-        return webClient.get()
+        return webClientBuilder
+                .build()
+                .get()
                 .uri(String.format("/api/v1/inventory?sku-code=%s&order-quantity=%d", skuCode, orderQuantity))
                 .retrieve()
                 .bodyToMono(InventoryResponse.class)
