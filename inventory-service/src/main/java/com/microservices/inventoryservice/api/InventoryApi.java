@@ -1,13 +1,12 @@
 package com.microservices.inventoryservice.api;
 
+import com.microservices.inventoryservice.dto.InventoryRequest;
 import com.microservices.inventoryservice.dto.InventoryResponse;
 import com.microservices.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -25,5 +24,13 @@ public class InventoryApi {
     ){
         log.info("Checking inventory");
         return inventoryService.checkInventoryInStock(skuCode, orderQuantity);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Void> addInventory(
+            @RequestBody InventoryRequest request
+    ) {
+        return inventoryService.addInventory(request);
     }
 }

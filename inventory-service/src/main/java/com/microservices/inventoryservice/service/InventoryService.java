@@ -1,6 +1,8 @@
 package com.microservices.inventoryservice.service;
 
+import com.microservices.inventoryservice.dto.InventoryRequest;
 import com.microservices.inventoryservice.dto.InventoryResponse;
+import com.microservices.inventoryservice.model.Inventory;
 import com.microservices.inventoryservice.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,5 +24,15 @@ public class InventoryService {
                         .isInStock(inventory.getQuantity() >= orderQuantity)
                         .build()
                 );
+    }
+
+    public Mono<Void> addInventory(InventoryRequest request) {
+        return Mono.just(Inventory.builder()
+                        .skuCode(request.getSkuCode())
+                        .quantity(request.getQuantity())
+                        .build()
+                )
+                .flatMap(inventoryRepository::save)
+                .then();
     }
 }
