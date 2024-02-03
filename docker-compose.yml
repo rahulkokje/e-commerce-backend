@@ -50,6 +50,16 @@ services:
     volumes:
       - ecommerce-data-inventory:/var/lib/postgresql/data
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.6
+    command:
+      - start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+
 volumes:
   ecommerce-data-products:
   ecommerce-data-orders:
