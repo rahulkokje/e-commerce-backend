@@ -1,0 +1,22 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: payments-service
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5434/payments
+    username: root
+    password: root
+  liquibase:
+    change-log: classpath:db/changelog/payments.changelog.sql
+    url: jdbc:postgresql://localhost:5434/payments
+    user: root
+    password: root
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      register-with-eureka: true
+      fetch-registry: true

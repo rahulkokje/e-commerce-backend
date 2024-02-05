@@ -50,6 +50,17 @@ services:
     volumes:
       - ecommerce-data-inventory:/var/lib/postgresql/data
 
+  payments_database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=payments
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - '5434:5432'
+    volumes:
+      - ecommerce-data-payments:/var/lib/postgresql/data
+
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.6
     command:
@@ -64,3 +75,4 @@ volumes:
   ecommerce-data-products:
   ecommerce-data-orders:
   ecommerce-data-inventory:
+  ecommerce-data-payments:

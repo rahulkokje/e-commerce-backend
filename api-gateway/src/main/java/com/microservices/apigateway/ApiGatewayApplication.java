@@ -32,6 +32,11 @@ public class ApiGatewayApplication {
 						.filters(f -> f.rewritePath("/inventory-service/(?<remaining>.*)", "/${remaining}"))
 						.uri("lb://inventory-service")
 				)
+				.route(p -> p
+						.path("/payments-service/**")
+						.filters(f -> f.rewritePath("/payments-service/(?<remaining>.*)", "/${remaining}"))
+						.uri("lb://payments-service")
+				)
 				.build();
 	}
 }
