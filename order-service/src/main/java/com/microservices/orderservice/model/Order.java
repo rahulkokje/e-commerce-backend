@@ -21,8 +21,15 @@ public class Order {
     @Id
     private Long id;
     private String orderNumber;
+    private String status;
 
     @Transient
     @ReadOnlyProperty
     private List<OrderItem> orderItems;
+
+    public Double getTotalAmount() {
+        return orderItems.stream()
+                .map(orderItem -> orderItem.getPrice() * orderItem.getQuantity())
+                .reduce(0d, Double::sum);
+    }
 }

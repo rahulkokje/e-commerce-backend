@@ -13,6 +13,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/orders
     user: root
     password: root
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topics:
+      order-creation-topic: order-creation-topic
 
 eureka:
   client:

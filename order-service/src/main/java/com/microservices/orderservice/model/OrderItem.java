@@ -19,7 +19,11 @@ public class OrderItem {
     @Id
     private Long id;
     private String skuCode;
-    private BigDecimal price;
+    private Double price;
     private Integer quantity;
     private Long orderId;
+
+    public Double calculateTotalPrice() {
+        return price * quantity;
+    }
 }

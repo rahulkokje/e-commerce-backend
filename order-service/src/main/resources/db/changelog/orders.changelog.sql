@@ -1,6 +1,7 @@
+-- liquibase formatted sql
 -- changeset rahulkokje:1
-DROP table IF EXISTS order_items;
-DROP table IF EXISTS orders;
+DROP table IF EXISTS t_order_item;
+DROP table IF EXISTS t_order;
 
 CREATE TABLE t_order(
     id SERIAL PRIMARY KEY,
@@ -15,3 +16,6 @@ CREATE TABLE t_order_item(
     order_id INTEGER,
     CONSTRAINT fk_order_id FOREIGN KEY(order_id) REFERENCES t_order(id)
 );
+
+-- changeset rahulkokje:2
+ALTER TABLE t_order ADD COLUMN status varchar(40);
